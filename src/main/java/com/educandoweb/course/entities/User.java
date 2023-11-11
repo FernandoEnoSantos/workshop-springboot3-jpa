@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -27,6 +29,7 @@ public class User implements Serializable{
 	private String phone;
 	private String password;
 	
+	@JsonIgnore //impede do banco fazer loop toda vez que chama o usuário, por causa da associação de mão dupla com Order. Poderia ser feito em Order ao inves daqui...
 	@OneToMany(mappedBy = "Client")
 	private List<Order> orders = new ArrayList<>();
 	
